@@ -10,7 +10,7 @@ const apiRoutes = require('./src/modules/routes/routes');
 
 app.use(cors());
 
-const url = 'mongodb+srv://lezhnevdaniil:Lezhnev_123@lezhnevdaniil.umqjb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const url = process.env.URL;
 mongoose.connect(url, { useUnifiedTopology: true });
 
 app.use(bodyParser.json());
