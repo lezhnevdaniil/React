@@ -1,30 +1,29 @@
-import React, {useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import imgDelete from '../img/download.jpeg';
 import imgEdit from '../img/edit-icon-image-0.jpg';
 import axios from 'axios';
 
-const Tasks = () => {
-
-  const [tasks, setTasks] = useState([]);
-  const [val, setVal] = useState('');
-  const [flag, setFlag] = useState(false);
-  
+const Tasks = ({tasks, setTasks, val, setVal, setActive, setTask, setEdit, editInput}) => {
 
   const url = 'http://localhost:8000'
 
   useEffect(async() => {
     await axios.get(`${url}/allTasks`).then(res => {
      setTasks(res.data);
-    });
-  }, [tasks])
+    })
+  },[tasks])
 
-  const submit = async() => {
-    await axios.post(`${url}/createTask`, {
-      text: val,
-      isCheck: false
-    }).then(res => {
-      setVal(res.data);
-    });  
+  const submit = async(e) => {
+    if (val) { 
+      await axios.post(`${url}/createTask`, {
+        text: val,
+        isCheck: false
+      }).then(res => {
+        setVal(res.data);
+      });
+    } else {
+      alert('Введите значение');
+    }
   }
 
   const deleteFunction = async(id) => {
@@ -42,17 +41,6 @@ const Tasks = () => {
     });
   }
 
-  const editFunction = async(id, Check, text, index) => {
-
-    // await axios.patch(`${url}/updateTask`, {
-    //   text: text,
-    //   isCheck: !Check,
-    //   _id: id,
-    // }).then(res => {
-    // });
-  }
-  //editFunction(task._id, task.isCheck, task.text)
-
   tasks.sort((a, b) => {
     if (a.isCheck === b.isCheck) return 0;
 
@@ -63,7 +51,7 @@ const Tasks = () => {
     <div className='tasks'>
       <div className='put'>
         <form onSubmit={submit}>
-          <input value={val} onChange={(e) => setVal(e.target.value)}></input>
+          <input value={val} onChange={(e) => {setVal(e.target.value)}}></input>
           <button>Add</button>
         </form>
       </div>
@@ -78,9 +66,12 @@ const Tasks = () => {
                 <p className={task.isCheck ? 'text' : ''}>{task.text}</p>
               </div>
               <div className='imgButton'>
-                <div className='edit-div'>
-                  <img className='edit-img' src={imgEdit} alt='Упс' onClick={() =>{ setFlag(true);editFunction(task._id, task.isCheck, task.text, index)}}></img>
-                </div>
+                {task.isCheck ? 
+                  <></> : 
+                  <div className='edit-div'>
+                    <img className='edit-img' src={imgEdit} alt='Упс' onClick={() => {setActive(true); setEdit(task.text); setTask(task)}}></img>
+                  </div>
+                }
                 <div className='delete-img'>
                   <img src={imgDelete} alt='Упс' onClick={() => deleteFunction(task._id)}></img>
                 </div> 

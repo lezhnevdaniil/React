@@ -1,15 +1,12 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
 
 .App {
@@ -23,18 +20,19 @@ code {
 
 .header{
   padding-bottom: 20px;
-  font-size: 25px;
+  font-size: 30px;
   margin: 0;
   padding-top: 13px;
 }
 
 .put {
   background-color: #497780;
-  padding-bottom: 25px;
+  padding: 0 20px 25px 40px;
 
   input {
     border-radius: 8px;
     border: none;
+    outline:none;
     margin-right: 15px;
     padding: 7px;
     font-size: 20px;
@@ -134,3 +132,61 @@ code {
   align-self: center;
 }
 
+.ok-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ok-img {
+    width: 40px;
+  }
+}
+
+@media (max-width: 850px) {
+  .edit-text {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 680px) {
+  .edit-text {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 635px) {
+  .task {
+    width: 75vw;
+  }
+
+  .task {
+    width: 75vw;
+  }
+
+  .put input {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 550px) {
+  .put input {
+    width: 50vw;
+  }
+  
+  .task img {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 405px) {
+  .ok-div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .edit-text {
+    width: 62vw;
+  }
+}
